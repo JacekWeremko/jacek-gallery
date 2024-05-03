@@ -1,25 +1,22 @@
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { desc } from "drizzle-orm";
 import { headers } from "next/headers";
 import Link from "next/link";
 import {db} from "~/server/db"
+import { Images } from "./_components/images";
 
 export const dynamic = "force-dynamic"
 
 export default async function HomePage() {
-  const images = await db.query.images.findMany({
-    orderBy: (model, {desc}) => desc(model.id)
-  });
 
   return (
     <main className="">
-      <div className="flex flex-wrap gap-8">
-        {[...images, ...images, ...images].map((image, index) => (
-          <div key={image.id} className="flex w-96 flex-col">
-            <img src={image.url}/>
-            <div>{image.name}</div>          
-          </div>
-        ))}
-      </div>
+      <SignedOut>
+        <div className="w-full h-full text-2xl">Please sign in</div>
+      </SignedOut>
+      <SignedIn>
+        <Images />
+      </SignedIn>
     </main>
   );
 }
