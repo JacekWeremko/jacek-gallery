@@ -7,6 +7,7 @@ import "@uploadthing/react/styles.css";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,14 +23,17 @@ export const metadata = {
 
 
 export default function RootLayout({
-  children
+  children,
+  modal
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <ClerkProvider>
       <html lang="en">
         <body className={`font-sans ${inter.variable}`}>
+          <SpeedInsights />
           <NextSSRPlugin
             /**
              * The `extractRouterConfig` will extract **only** the route configs
@@ -41,6 +45,8 @@ export default function RootLayout({
           />
           <TopNav />
           {children}
+          {modal}
+          <div id="modal-root" />
         </body>
       </html>
     </ClerkProvider>
