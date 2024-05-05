@@ -7,6 +7,11 @@ import * as Sentry from "@sentry/nextjs";
 Sentry.init({
   dsn: "https://981e19c8f1d09c9dce2943934de19478@o4507203850207232.ingest.de.sentry.io/4507203851976784",
 
+  integrations: [
+    // Add browser profiling integration to the list of integrations
+    new Sentry.BrowserProfilingIntegration(),
+  ],
+
   // Adjust this value in production, or use tracesSampler for greater control
   tracesSampleRate: 1,
   profilesSampleRate: 1.0,
