@@ -2,7 +2,7 @@ import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { desc } from "drizzle-orm";
 import { headers } from "next/headers";
 import Link from "next/link";
-import {db} from "~/server/db"
+import { db } from "~/server/db"
 import { Images } from "./_components/images";
 
 export const dynamic = "force-dynamic"
